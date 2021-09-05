@@ -25,4 +25,4 @@
 /analysis/ntuple/setActivation 2 true
 /analysis/ntuple/setActivation 3 true
 
-/run/beamOn 100
+/run/beamOn 1

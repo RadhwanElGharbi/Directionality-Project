@@ -3,10 +3,10 @@
     Geant4 - an Object-Oriented Toolkit for Simulation in HEP
     =========================================================
 
-                              rdecay02
+                              directionality01
                               --------
 
-  Rdecay02 is created to show how to use the G4RadioactiveDecay process to 
+  directionality01 is created to show how to use the G4RadioactiveDecay process to 
   simulate the decays of radioactive isotopes as well as the induced
   radioactivity resulted from nuclear interactions. 
 
@@ -27,7 +27,7 @@
       tube is 2 cm and it is 5 cm long. The default material is "Germanium".
 
     The user can change the target/detector size and material, using the 
-    commands in the directory  /rdecay02/det
+    commands in the directory  /directionality01/det
 
   2. PHYSICS
 
@@ -116,14 +116,14 @@
   The ntuples can be activated with the command /analysis/ntuple/setActivation
            
    One can control the name of the analysis file with the command:
-   /analysis/setFileName  name  (default rdecay02)
+   /analysis/setFileName  name  (default directionality01)
    
    It is possible to choose the format of the histogram file : root (default),
    xml, csv, by using namespace in HistoManager.hh
        
    It is also possible to print selected histograms on an ascii file:
    /analysis/h1/setAscii id
-   All selected histos will be written on a file name.ascii (default rdecay02)
+   All selected histos will be written on a file name.ascii (default directionality01)
    
  6. VISUALIZATION
  
@@ -141,11 +141,11 @@
  	
  7. HOW TO START ?
  
-   Execute rdecay02 in 'batch' mode from macro files :
- 	% rdecay02   run1.mac
+   Execute directionality01 in 'batch' mode from macro files :
+ 	% directionality01   run1.mac
  		
-   Execute rdecay02 in 'interactive mode' with visualization :
- 	% rdecay02
+   Execute directionality01 in 'interactive mode' with visualization :
+ 	% directionality01
 	Idle> control/execute vis.mac
  	....
  	Idle> type your commands

@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.8...3.18)
 if(${CMAKE_VERSION} VERSION_LESS 3.12)
   cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
-project(rdecay02)
+project(directionality01)
 
 #----------------------------------------------------------------------------
 # Find Geant4 package, activating all available UI and Vis drivers by default
@@ -34,23 +34,23 @@ file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
 #----------------------------------------------------------------------------
 # Add the executable, and link it to the Geant4 libraries
 #
-add_executable(rdecay02 rdecay02.cc ${sources} ${headers})
-target_link_libraries(rdecay02 ${Geant4_LIBRARIES} )
+add_executable(directionality01 directionality01.cc ${sources} ${headers})
+target_link_libraries(directionality01 ${Geant4_LIBRARIES} )
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
-# build rdecay02. This is so that we can run the executable directly because it
+# build directionality01. This is so that we can run the executable directly because it
 # relies on these scripts being in the current working directory.
 #
-set(rdecay02_SCRIPTS
+set(directionality01_SCRIPTS
     debug.mac
     plotHisto.C
-    rdecay02.in
+    directionality01.in
     vis.mac
     /macros/electron.mac
   )
 
-foreach(_script ${rdecay02_SCRIPTS})
+foreach(_script ${directionality01_SCRIPTS})
   configure_file(
     ${PROJECT_SOURCE_DIR}/${_script}
     ${PROJECT_BINARY_DIR}/${_script}
@@ -61,5 +61,5 @@ endforeach()
 #----------------------------------------------------------------------------
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
-install(TARGETS rdecay02 DESTINATION bin)
+install(TARGETS directionality01 DESTINATION bin)
 

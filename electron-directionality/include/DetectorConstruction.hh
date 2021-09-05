@@ -35,6 +35,7 @@
 #define DetectorConstruction_h 1
 
 #include "G4VUserDetectorConstruction.hh"
+#include "HitsAction.hh"
 #include "globals.hh"
 
 class G4LogicalVolume;
@@ -226,7 +227,8 @@ class DetectorConstruction : public G4VUserDetectorConstruction
   private:
     
     void               DefineMaterials();
-    G4VPhysicalVolume* ConstructVolumes();     
+    G4VPhysicalVolume* ConstructVolumes();
+    virtual void ConstructSDandField();  
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

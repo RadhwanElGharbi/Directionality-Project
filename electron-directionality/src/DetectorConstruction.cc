@@ -33,6 +33,7 @@
 
 #include "DetectorConstruction.hh"
 #include "DetectorMessenger.hh"
+#include "HitsAction.hh"
 
 #include "G4Material.hh"
 #include "G4NistManager.hh"
@@ -46,6 +47,7 @@
 #include "G4LogicalVolumeStore.hh"
 #include "G4SolidStore.hh"
 #include "G4RunManager.hh"
+#include "G4SDManager.hh"
 
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
@@ -248,6 +250,8 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
                            lWorld,                      //mother  volume
                            false,                       //no boolean operation
                            0);                          //copy number
+
+
   // Detector
   //
   /**G4Tubs* 
@@ -430,6 +434,13 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   //always return the root volume
   //
   return fPhysiWorld;
+}
+
+void DetectorConstruction::ConstructSDandField()
+{
+  SensitiveDetectorVol *sensDet = new SensitiveDetectorVol("SensitiveDetector");
+
+  fLogicTarget->SetSensitiveDetector(sensDet);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
