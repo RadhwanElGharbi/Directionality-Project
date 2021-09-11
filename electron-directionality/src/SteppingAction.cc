@@ -40,6 +40,7 @@
 #include "G4RunManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4UnitsTable.hh"
+
                            
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -80,7 +81,19 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   G4double edepStep = aStep->GetTotalEnergyDeposit();
   if (edepStep <= 0.) return;
   G4double time   = aStep->GetPreStepPoint()->GetGlobalTime();
-  G4double weight = aStep->GetPreStepPoint()->GetWeight();   
+  G4double weight = aStep->GetPreStepPoint()->GetWeight();
+  G4ThreeVector posParticle = aStep->GetPreStepPoint()->GetPosition();
+  G4double eneParticle = aStep->GetPreStepPoint()->GetTotalEnergy();
+  G4double particleX = posParticle.getX();
+  G4double particleY = posParticle.getY();
+  G4double particleZ = posParticle.getZ();
+
+  if(particleZ/10 <= fDetector->GetTargetLength()/2 && particleZ/10 >= -1*(fDetector->GetTargetLength()/2)) {
+    analysisManager->FillH3(0, particleX, particleY, particleZ);
+    G4cout << "Electron position " << posParticle
+         << "\nElectron energy " << G4BestUnit(eneParticle, "Energy") << G4endl;
+  }
+ 
   fEventAction->AddEdep(iVol, edepStep, time, weight);
   
   //fill ntuple id = 2
@@ -88,7 +101,8 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   analysisManager->FillNtupleDColumn(id,0, edepStep);
   analysisManager->FillNtupleDColumn(id,1, time/s);
   analysisManager->FillNtupleDColumn(id,2, weight);
-  analysisManager->AddNtupleRow(id);      
+  analysisManager->AddNtupleRow(id);  
+    
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

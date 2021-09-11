@@ -41,6 +41,8 @@
 
 #include "G4UImanager.hh"
 #include "Randomize.hh"
+#include "FTFP_BERT_HP.hh"
+#include "G4EmStandardPhysics_option4.hh"
 
 #include "DetectorConstruction.hh"
 #include "PhysicsList.hh"
@@ -77,7 +79,8 @@ int main(int argc,char** argv) {
   DetectorConstruction* det= new DetectorConstruction;
   runManager->SetUserInitialization(det);
 
-  PhysicsList* phys = new PhysicsList;
+  G4VModularPhysicsList* phys = new FTFP_BERT_HP();
+  phys->ReplacePhysics(new G4EmStandardPhysics_option4());
   runManager->SetUserInitialization(phys);
 
   runManager->SetUserInitialization(new ActionInitialization(det));

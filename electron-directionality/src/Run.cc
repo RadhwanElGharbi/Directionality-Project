@@ -408,8 +408,8 @@ void Run::EndOfRun()
          << " Radius    = " 
          << G4BestUnit(fDetector->GetTargetRadius(),"Length")  
          << " Material = " 
-         << fDetector->GetTargetMaterial()->GetName();
-  G4cout << "\n Detector : Length = " 
+         << fDetector->GetTargetMaterial()->GetName() << G4endl;
+  /*G4cout << "\n Detector : Length = " 
          << G4BestUnit(fDetector->GetDetectorLength(),"Length")
          << " Thickness = " 
          << G4BestUnit(fDetector->GetDetectorThickness(),"Length")  
@@ -426,7 +426,7 @@ void Run::EndOfRun()
          << " Thickness = " 
          << G4BestUnit(fDetector->GetShieldThickness(),"Length")  
          << " Material = " 
-         << fDetector->GetShieldMaterial()->GetName() << G4endl;
+         << fDetector->GetShieldMaterial()->GetName() << G4endl;*/
 
   if (numberOfEvent == 0) { G4cout.precision(dfprec);   return;}
   
@@ -445,7 +445,7 @@ void Run::EndOfRun()
 
   // compute mean Energy deposited and rms in detector
   //
-  fEdepDetect /= TotNbofEvents; fEdepDetect2 /= TotNbofEvents;
+  /*fEdepDetect /= TotNbofEvents; fEdepDetect2 /= TotNbofEvents;
   rmsEdep = fEdepDetect2 - fEdepDetect*fEdepDetect;
   if (rmsEdep>0.) rmsEdep = std::sqrt(rmsEdep);
   else            rmsEdep = 0.;
@@ -478,7 +478,7 @@ void Run::EndOfRun()
          << G4BestUnit(fEdepShield,"Energy") << ";  rms = "
          << G4BestUnit(rmsEdep,    "Energy") 
          << G4endl;
-
+*/
   // frequency of processes in target
   //
   G4cout << "\n Process calls frequency in target :" << G4endl;
@@ -495,6 +495,7 @@ void Run::EndOfRun()
   
   // frequency of processes in detector
   //
+  /*
   G4cout << "\n Process calls frequency in detector:" << G4endl;
   index = 0;
   std::map<G4String,G4int>::iterator it2;    
@@ -532,7 +533,7 @@ void Run::EndOfRun()
      G4String space = " "; if (++index%3 == 0) space = "\n";
      G4cout << " " << std::setw(20) << procName << "="<< std::setw(7) << count
             << space;
-  }
+  }*/
   G4cout << G4endl;
     
   // particles count in target
@@ -554,7 +555,7 @@ void Run::EndOfRun()
            << " --> " << G4BestUnit(eMax, "Energy") 
            << ")" << G4endl;           
  }
-
+ /*
  // particles count in detector
  //
  G4cout << "\n List of generated particles in detector:" << G4endl;
@@ -597,7 +598,7 @@ void Run::EndOfRun()
 
  // particles count in shield
  //
- G4cout << "\n List of generated particles in detector:" << G4endl;
+ G4cout << "\n List of generated particles in shield:" << G4endl;
      
  std::map<G4String,ParticleData>::iterator itsh;               
  for (itsh = fParticleDataMap4.begin(); itsh != fParticleDataMap4.end(); itsh++) { 
@@ -612,9 +613,9 @@ void Run::EndOfRun()
            << "  Emean = " << std::setw(wid) << G4BestUnit(eMean, "Energy")
            << "\t( "  << G4BestUnit(eMin, "Energy")
            << " --> " << G4BestUnit(eMax, "Energy") << ")" << G4endl; 
-  }
+  }*/
   G4cout << G4endl;
-
+  
 
  
   // activities in VR mode

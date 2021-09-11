@@ -6,9 +6,9 @@
 /gps/particle e-
 
 /gps/pos/type Beam
-/gps/pos/centre 0 0 13 m
-##/gps/ang/rot1 0 0 -1
-##/gps/ang/rot2 0 0 -1
+/gps/pos/centre 0. 0. 1. m
+#/gps/ang/rot1 0. 0. -1.
+#/gps/ang/rot2 0. 0. -1.
 /gps/ang/type beam1d
 
 
@@ -20,9 +20,11 @@
 /analysis/h1/set 0 100 0. 5. MeV
 /analysis/h1/set 1 100 0. 5. MeV
 /analysis/h1/set 6 100 0. 5. MeV
+/analysis/h3/set 0 100 -50 50 mm none linear 100 -50 50 cm none linear 100 -50 50 cm none linear
 /analysis/ntuple/setActivation 0 true
 /analysis/ntuple/setActivation 1 true
 /analysis/ntuple/setActivation 2 true
 /analysis/ntuple/setActivation 3 true
+
 
 /run/beamOn 1

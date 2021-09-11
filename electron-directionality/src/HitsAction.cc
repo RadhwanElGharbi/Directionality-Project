@@ -65,7 +65,7 @@ G4bool SensitiveDetectorVol::ProcessHits(G4Step *step, G4TouchableHistory *R0his
   hitCollection->insert(aHit);
   aHit->AddEdep( edep );
   return true;
-  */
+  
   G4Track *track = step->GetTrack();
   G4StepPoint *preStepPoint = step->GetPreStepPoint();
  
@@ -75,7 +75,7 @@ G4bool SensitiveDetectorVol::ProcessHits(G4Step *step, G4TouchableHistory *R0his
   G4double eneElectron = preStepPoint->GetTotalEnergy();
   
   G4cout << "Electron position " << posElectron
-         << "\nElectron energy " << G4BestUnit(eneElectron, "Energy") << G4endl;
+         << "\nElectron energy " << G4BestUnit(eneElectron, "Energy") << G4endl;*/
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

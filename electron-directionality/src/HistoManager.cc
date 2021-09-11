@@ -33,6 +33,7 @@
 #include "HistoManager.hh"
 #include "G4UnitsTable.hh"
 
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 HistoManager::HistoManager()
@@ -111,6 +112,9 @@ void HistoManager::Book()
   id = analysis->CreateH1("H18","Decay emission spectrum (0 - 0.1 MeV)",
                  nbins, vmin, vmax);
   analysis->SetH1Activation(id, false);
+
+  id = analysis->CreateH3("H30", "Electron Directionality in Volume", nbins, vmin, vmax, nbins, vmin, vmax, nbins, vmin, vmax);
+  analysis->SetH3Activation(id, false);
   
   // nTuples
   //
@@ -147,5 +151,7 @@ void HistoManager::Book()
   
   analysis->SetNtupleActivation(false);          
 }
+
+
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
