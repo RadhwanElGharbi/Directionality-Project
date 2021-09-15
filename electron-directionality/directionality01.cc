@@ -81,6 +81,7 @@ int main(int argc,char** argv) {
 
   G4VModularPhysicsList* phys = new FTFP_BERT_HP();
   phys->ReplacePhysics(new G4EmStandardPhysics_option4());
+  //PhysicsList* phys = new PhysicsList;
   runManager->SetUserInitialization(phys);
 
   runManager->SetUserInitialization(new ActionInitialization(det));

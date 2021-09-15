@@ -436,12 +436,12 @@ G4VPhysicalVolume* DetectorConstruction::ConstructVolumes()
   return fPhysiWorld;
 }
 
-void DetectorConstruction::ConstructSDandField()
+/*void DetectorConstruction::ConstructSDandField()
 {
   SensitiveDetectorVol *sensDet = new SensitiveDetectorVol("SensitiveDetector");
 
   fLogicTarget->SetSensitiveDetector(sensDet);
-}
+}*/
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

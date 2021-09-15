@@ -228,7 +228,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     
     void               DefineMaterials();
     G4VPhysicalVolume* ConstructVolumes();
-    virtual void ConstructSDandField();  
+    /*virtual void ConstructSDandField();  */
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

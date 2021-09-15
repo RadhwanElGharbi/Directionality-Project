@@ -88,11 +88,9 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   G4double particleY = posParticle.getY();
   G4double particleZ = posParticle.getZ();
 
-  if(particleZ/10 <= fDetector->GetTargetLength()/2 && particleZ/10 >= -1*(fDetector->GetTargetLength()/2)) {
-    analysisManager->FillH3(0, particleX, particleY, particleZ);
-    G4cout << "Electron position " << posParticle
+  analysisManager->FillH3(0, particleX, particleY, particleZ, eneParticle);
+  G4cout << "Electron position " << posParticle
          << "\nElectron energy " << G4BestUnit(eneParticle, "Energy") << G4endl;
-  }
  
   fEventAction->AddEdep(iVol, edepStep, time, weight);
   
