@@ -105,6 +105,9 @@ void RunAction::EndOfRunAction(const G4Run*)
     analysisManager->Write();
     analysisManager->CloseFile();
   }
+  /*HistoManager * histoManager = new HistoManager;
+
+  histoManager->Save();*/
       
   // show Rndm status
   if (isMaster) G4Random::showEngineStatus();

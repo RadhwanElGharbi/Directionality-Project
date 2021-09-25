@@ -122,6 +122,35 @@ void EventAction::EndOfEventAction(const G4Event*)
  
  // threshold in target, detector, gap, and shield        
  const G4double Threshold1(10*keV), Threshold2(10*keV), Threshold3(10*keV), Threshold4(10*keV);
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+ // get MC particle
+ MCParticle * mc_particle = new MCParticle;
+
+ // get map of particles from MC truth manager
+ auto const MCParticleMap = mc_particle->GetMCParticleMap();
+
+ HistoManager * histo_manager = new HistoManager;
+
+ for (auto const& p : MCParticleMap)
+ {
+   auto const& particle = p.second;
+   //----//
+   G4cout << "*TEST TEST TEST* " << particle << G4endl;
+   //----// 
+   histo_manager->AddMCParticle(particle);
+ }
+
+ // write event to ROOT file and reset event variables
+ histo_manager->EventFill();
+ histo_manager->EventReset();
+
+ // reset event in MC truth manager
+ mc_particle->EventReset();
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
   
  //coincidence, anti-coincidences 
  //  
