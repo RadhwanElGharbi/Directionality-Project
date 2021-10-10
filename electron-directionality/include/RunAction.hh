@@ -61,7 +61,10 @@ class RunAction : public G4UserRunAction
     PrimaryGeneratorAction*    fPrimary;
     Run*                       fRun;    
     HistoManager*              fHistoManager;
-        
+  
+  private:
+    G4String root_output_path_;
+    bool multirun_;      
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -35,6 +35,7 @@
 #include "DetectorConstruction.hh"
 #include "PrimaryGeneratorAction.hh"
 #include "HistoManager.hh"
+#include "MCTruthManager.hh"
 
 #include "G4Run.hh"
 #include "G4RunManager.hh"
@@ -47,7 +48,7 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 RunAction::RunAction(DetectorConstruction* det, PrimaryGeneratorAction* prim)
-  : G4UserRunAction(),
+  : G4UserRunAction(), multirun_(false),
     fDetector(det), fPrimary(prim), fRun(0), fHistoManager(0)
 {
  // Book predefined histograms
@@ -71,8 +72,9 @@ G4Run* RunAction::GenerateRun()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void RunAction::BeginOfRunAction(const G4Run*)
+void RunAction::BeginOfRunAction(const G4Run* run)
 {    
+  G4cout << "RunAction::BeginOfRunAction: Run #" << run->GetRunID() << " start." << G4endl;
   // save Rndm status
   G4RunManager::GetRunManager()->SetRandomNumberStore(false);
   if (isMaster) G4Random::showEngineStatus();
@@ -91,6 +93,21 @@ void RunAction::BeginOfRunAction(const G4Run*)
   if ( analysisManager->IsActive() ) {
     analysisManager->OpenFile();
   }  
+// get run number
+    HistoManager * histo_manager = HistoManager::Instance();
+    // analysis_manager->Book(root_output_path_);
+    histo_manager->Book();
+    histo_manager->SetRun(run->GetRunID());
+
+    // reset event variables
+    histo_manager->EventReset();
+
+    // get MC truth manager
+    MCTruthManager * mc_truth_manager = MCTruthManager::Instance();
+
+    // reset event in MC truth manager
+    mc_truth_manager->EventReset();
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -105,12 +122,15 @@ void RunAction::EndOfRunAction(const G4Run*)
     analysisManager->Write();
     analysisManager->CloseFile();
   }
-  /*HistoManager * histoManager = new HistoManager;
-
-  histoManager->Save();*/
       
   // show Rndm status
   if (isMaster) G4Random::showEngineStatus();
+
+
+  HistoManager * histo_manager = HistoManager::Instance();
+
+  // save run to ROOT file
+  histo_manager->Save();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

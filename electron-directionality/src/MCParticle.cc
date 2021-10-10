@@ -64,15 +64,3 @@ void MCParticle::AddDaughter(int const trackID)
     number_daughters_++;
 }
 
-void MCParticle::EventReset()
-{
-    // delete pointers in MC particle map
-    for (auto p : mc_particle_map_)
-    {
-        delete p.second;
-    }
-
-    // clear MC particle map container
-    mc_particle_map_.clear();
-}
-

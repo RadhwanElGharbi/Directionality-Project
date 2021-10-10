@@ -23,13 +23,13 @@ endif()
 #
 include(${Geant4_USE_FILE})
 
-# Find the ROOT package
+## find the ROOT package
 find_package(ROOT REQUIRED)
 
-# Include ROOT header files
+## include ROOT header files
 include(${ROOT_USE_FILE})
 
-# link ROOT libraries
+## link ROOT libraries
 link_libraries(${ROOT_LIBRARIES})
 
 #----------------------------------------------------------------------------

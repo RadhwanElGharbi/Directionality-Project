@@ -35,6 +35,8 @@
 #include "DetectorConstruction.hh"
 #include "Run.hh"
 #include "HistoManager.hh"
+#include "MCParticle.hh"
+#include "MCTruthManager.hh"
 
 #include "G4RunManager.hh"
 #include "G4Track.hh"
@@ -120,12 +122,71 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     analysisManager->FillNtupleDColumn(id,2, weight);
     analysisManager->AddNtupleRow(id);  
   }
+
+  //--------------------------------------------------------------------------------------------------------------------//
+// get MC truth manager
+    MCTruthManager * mc_truth_manager = MCTruthManager::Instance();
+
+    // create new MCParticle object
+    MCParticle * particleMC = new MCParticle();
+    particleMC->SetTrackID(track->GetTrackID());
+    particleMC->SetParentTrackID(track->GetParentID());
+    particleMC->SetPDGCode(track->GetDefinition()->GetPDGEncoding());
+    particleMC->SetMass(track->GetDynamicParticle()->GetMass());
+    particleMC->SetCharge(track->GetDynamicParticle()->GetCharge());
+    particleMC->SetGlobalTime(track->GetGlobalTime() / CLHEP::ns);
+    // particleMC->SetProcess();
+    particleMC->SetTotalOccupancy(track->GetDynamicParticle()->GetTotalOccupancy());
+
+    particleMC->SetInitialPosition(
+        TLorentzVector(
+            track->GetPosition().x() / CLHEP::cm,
+            track->GetPosition().y() / CLHEP::cm,
+            track->GetPosition().z() / CLHEP::cm,
+            track->GetGlobalTime()   / CLHEP::ns
+        )
+    );
+
+    particleMC->SetInitialMomentum(
+        TLorentzVector(
+            track->GetMomentum().x() / CLHEP::MeV,
+            track->GetMomentum().y() / CLHEP::MeV,
+            track->GetMomentum().z() / CLHEP::MeV,
+            track->GetTotalEnergy()  / CLHEP::MeV
+        )
+    );
+
+    // add track ID to parent MC particle
+    // we might need to deal with cases where some particles aren't tracked (?)
+    // we can use a try block for that if need be
+    if (track->GetParentID() > 0)
+    {
+        // get parent MC particle
+        MCParticle * parent_particle = mc_truth_manager->GetMCParticle(track->GetParentID());
+        parent_particle->AddDaughter(track->GetTrackID());
+    }
+
+    // add MC particle to MC truth manager
+    mc_truth_manager->AddMCParticle(particleMC);
+
+  //--------------------------------------------------------------------------------------------------------------------//
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void TrackingAction::PostUserTrackingAction(const G4Track* )
-{ }
+void TrackingAction::PostUserTrackingAction(const G4Track* track)
+{
+// get MC truth manager
+    MCTruthManager * mc_truth_manager = MCTruthManager::Instance();
+
+    // get MC particle
+    G4cout << "ZZ trackID " << track->GetTrackID() << G4endl;
+    MCParticle * particle = mc_truth_manager->GetMCParticle(track->GetTrackID());
+
+    // set process
+    particle->SetProcess(track->GetStep()->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName());
+
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

@@ -100,6 +100,10 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   analysisManager->FillNtupleDColumn(id,1, time/s);
   analysisManager->FillNtupleDColumn(id,2, weight);
   analysisManager->AddNtupleRow(id);  
+
+  HistoManager * histo_manager = HistoManager::Instance();
+
+  histo_manager->AddProcess(aStep->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName());
     
 }
 

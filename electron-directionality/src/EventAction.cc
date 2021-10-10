@@ -35,6 +35,7 @@
 
 #include "Run.hh"
 #include "HistoManager.hh"
+#include "MCTruthManager.hh"
 
 #include "G4Event.hh"
 #include "G4RunManager.hh"
@@ -82,7 +83,7 @@ void EventAction::AddEdep(G4int iVol, G4double edep,
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void EventAction::EndOfEventAction(const G4Event*)
+void EventAction::EndOfEventAction(const G4Event* event)
 {
  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
  
@@ -122,35 +123,6 @@ void EventAction::EndOfEventAction(const G4Event*)
  
  // threshold in target, detector, gap, and shield        
  const G4double Threshold1(10*keV), Threshold2(10*keV), Threshold3(10*keV), Threshold4(10*keV);
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
- // get MC particle
- MCParticle * mc_particle = new MCParticle;
-
- // get map of particles from MC truth manager
- auto const MCParticleMap = mc_particle->GetMCParticleMap();
-
- HistoManager * histo_manager = new HistoManager;
-
- for (auto const& p : MCParticleMap)
- {
-   auto const& particle = p.second;
-   //----//
-   G4cout << "*TEST TEST TEST* " << particle << G4endl;
-   //----// 
-   histo_manager->AddMCParticle(particle);
- }
-
- // write event to ROOT file and reset event variables
- histo_manager->EventFill();
- histo_manager->EventReset();
-
- // reset event in MC truth manager
- mc_particle->EventReset();
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
   
  //coincidence, anti-coincidences 
  //  
@@ -167,7 +139,76 @@ void EventAction::EndOfEventAction(const G4Event*)
  Run* run = static_cast<Run*>(
             G4RunManager::GetRunManager()->GetNonConstCurrentRun());
              
- run->AddEdep (fEdep1, fEdep2, fEdep3, fEdep4);             
+ run->AddEdep (fEdep1, fEdep2, fEdep3, fEdep4);     
+
+ //----------------------------------------------------------------------------------------------------------------------------------------//
+// get MC truth manager
+    MCTruthManager * mc_truth_manager = MCTruthManager::Instance();
+
+    // get map of particles from MC truth manager
+    auto const MCParticleMap = mc_truth_manager->GetMCParticleMap();
+
+    double energy_deposited = 0.;
+
+    // add particle to analysis manager
+    for (auto const& p : MCParticleMap)
+    {
+        auto const& particle = p.second;
+        energy_deposited += particle->EnergyDeposited();
+        // std::cout << "Energy deposited by particle PDG (" << particle->PDGCode() << "): " << particle->EnergyDeposited() << std::endl;
+    }
+
+    int mod = event->GetEventID() % 1000;
+    if (mod == 0)
+    {
+        G4cout << "Event " << event->GetEventID() << "..." << G4endl;
+        // G4cout << "Energy threshold: " << energy_threshold_ << G4endl;
+        // G4cout << "Total energy deposited: " << energy_deposited << G4endl;
+    }
+
+    // don't save event if total energy deposited is below the energy threshold
+    if (energy_deposited < energy_threshold_)
+    {
+        // get analysis manager
+        HistoManager * histo_manager = HistoManager::Instance();
+
+        // reset event variables
+        histo_manager->EventReset();
+
+        // reset event in MC truth manager
+        mc_truth_manager->EventReset();
+
+        return;
+    }
+
+    // get analysis manager
+    HistoManager * histo_manager = HistoManager::Instance();
+
+    // set event number
+    // event->SetEventID(event->GetEventID() + event_id_offset_);
+    // analysis_manager->SetEvent(event->GetEventID());
+    histo_manager->SetEvent(event->GetEventID() + event_id_offset_);
+
+    // get map of particles from MC truth manager
+    // auto const MCParticleMap = mc_truth_manager->GetMCParticleMap();
+
+    // add particle to analysis manager
+    for (auto const& p : MCParticleMap)
+    {
+        auto const& particle = p.second;
+
+        histo_manager->AddMCParticle(particle);
+    }
+
+    // write event to ROOT file and reset event variables
+    histo_manager->EventFill();
+    histo_manager->EventReset();
+
+    // reset event in MC truth manager
+    mc_truth_manager->EventReset();
+ //----------------------------------------------------------------------------------------------------------------------------------------//
+
+        
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

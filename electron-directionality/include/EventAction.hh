@@ -54,7 +54,9 @@ class EventAction : public G4UserEventAction
   private:
     G4double fEdep1,   fEdep2, fEdep3, fEdep4;
     G4double fWeight1, fWeight2, fWeight3, fWeight4;
-    G4double fTime0;    
+    G4double fTime0; 
+    int event_id_offset_;
+    double energy_threshold_;   
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

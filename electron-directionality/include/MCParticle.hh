@@ -24,8 +24,6 @@
 #include <tuple>
 #include <utility>
 #include <vector>
-#include <map>
-#include <set>
 
 // struct TrajectoryPoint
 // {
@@ -91,8 +89,6 @@ class MCParticle
         void AddTrajectoryHit(TrajectoryHit const &);
         void AddTrajectoryHit(G4Step const *);
 
-        void EventReset();
-
         void AddDaughter(int const);
 
         inline std::vector< TrajectoryHit > Hits() const { return hits_; }
@@ -126,9 +122,6 @@ class MCParticle
         inline void SetInitialPosition(TLorentzVector const initialPosition) { initial_position_ = initialPosition; }
         inline void SetInitialMomentum(TLorentzVector const initialMomentum) { initial_momentum_ = initialMomentum; }
 
-    public:
-        inline std::map< int, MCParticle * > GetMCParticleMap() const { return mc_particle_map_; }
-
     private:
 
         int         track_id_;
@@ -150,10 +143,7 @@ class MCParticle
 
         int                number_daughters_ = 0;
         std::vector< int > daughter_track_ids_;
-    private:
-        // MC particle map
-        // std::map< int, MCParticle > mc_particle_map_;
-        std::map< int, MCParticle * > mc_particle_map_;
+
 };
 
 #endif
