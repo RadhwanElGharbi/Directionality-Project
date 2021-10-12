@@ -10,7 +10,7 @@
 #define MCParticle_h 1
 
 // Q-Pix includes
-#include "geo_types.h"
+#include "geo_types.hh"
 
 // GEANT4 includes
 #include "G4LorentzVector.hh"
