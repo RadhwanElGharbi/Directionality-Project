@@ -73,12 +73,12 @@ void EventAction::AddEdep(G4int iVol, G4double edep,
   
   // out of time window ?
   const G4double TimeWindow (1*microsecond);
-  if (std::fabs(time - fTime0) > TimeWindow) return;
+  /*if (std::fabs(time - fTime0) > TimeWindow) return;
   
   if (iVol == 1) { fEdep1 += edep; fWeight1 += edep*weight;}
   if (iVol == 2) { fEdep2 += edep; fWeight2 += edep*weight;} 
   if (iVol == 3) { fEdep3 += edep; fWeight3 += edep*weight;} 
-  if (iVol == 4) { fEdep4 += edep; fWeight4 += edep*weight;}  
+  if (iVol == 4) { fEdep4 += edep; fWeight4 += edep*weight;} */ 
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -87,7 +87,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
 {
  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
  
- G4double Etot = fEdep1 + fEdep2 + fEdep3 + fEdep4;
+ /*G4double Etot = fEdep1 + fEdep2 + fEdep3 + fEdep4;
  G4double Wtot = (fWeight1 + fWeight2 + fWeight3 + fWeight4)/Etot;
  
  // pulse height in target
@@ -139,7 +139,7 @@ void EventAction::EndOfEventAction(const G4Event* event)
  Run* run = static_cast<Run*>(
             G4RunManager::GetRunManager()->GetNonConstCurrentRun());
              
- run->AddEdep (fEdep1, fEdep2, fEdep3, fEdep4);     
+ run->AddEdep (fEdep1, fEdep2, fEdep3, fEdep4);  */   
 
  //----------------------------------------------------------------------------------------------------------------------------------------//
 // get MC truth manager

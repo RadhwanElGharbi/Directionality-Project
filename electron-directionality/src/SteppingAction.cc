@@ -79,7 +79,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   // energy deposit
   //
   G4double edepStep = aStep->GetTotalEnergyDeposit();
-  if (edepStep <= 0.) return;
+  /*if (edepStep <= 0.) return;
   G4double time   = aStep->GetPreStepPoint()->GetGlobalTime();
   G4double weight = aStep->GetPreStepPoint()->GetWeight();
   G4ThreeVector posParticle = aStep->GetPreStepPoint()->GetPosition();
@@ -99,7 +99,7 @@ void SteppingAction::UserSteppingAction(const G4Step* aStep)
   analysisManager->FillNtupleDColumn(id,0, edepStep);
   analysisManager->FillNtupleDColumn(id,1, time/s);
   analysisManager->FillNtupleDColumn(id,2, weight);
-  analysisManager->AddNtupleRow(id);  
+  analysisManager->AddNtupleRow(id);  */
 
   HistoManager * histo_manager = HistoManager::Instance();
 

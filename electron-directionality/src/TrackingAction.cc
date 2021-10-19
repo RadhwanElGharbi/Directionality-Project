@@ -70,7 +70,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
   if (lVolume == fDetector->GetLogicShield()) iVol = 4;
     
   //secondary particles only
-  if (track->GetTrackID() == 1) return;
+  /*if (track->GetTrackID() == 1) return;
   
   const G4ParticleDefinition* particle = track->GetParticleDefinition();  
   G4String name   = particle->GetParticleName();
@@ -121,7 +121,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     analysisManager->FillNtupleDColumn(id,1, time/s);
     analysisManager->FillNtupleDColumn(id,2, weight);
     analysisManager->AddNtupleRow(id);  
-  }
+  }*/
 
   //--------------------------------------------------------------------------------------------------------------------//
 // get MC truth manager
@@ -167,6 +167,7 @@ void TrackingAction::PreUserTrackingAction(const G4Track* track)
     }
 
     // add MC particle to MC truth manager
+    G4cout << "particleMCJJJ trackID " << particleMC->TrackID() << G4endl;
     mc_truth_manager->AddMCParticle(particleMC);
 
   //--------------------------------------------------------------------------------------------------------------------//
@@ -182,7 +183,7 @@ void TrackingAction::PostUserTrackingAction(const G4Track* track)
     // get MC particle
     G4cout << "ZZ trackID " << track->GetTrackID() << G4endl;
     MCParticle * particle = mc_truth_manager->GetMCParticle(track->GetTrackID());
-
+    G4cout << "particleMC trackID " << particle->TrackID() << G4endl;
     // set process
     particle->SetProcess(track->GetStep()->GetPostStepPoint()->GetProcessDefinedStep()->GetProcessName());
 

@@ -205,6 +205,7 @@ void HistoManager::Book()
     event_tree_->Branch("hit_energy_deposit", &hit_energy_deposit_);
     event_tree_->Branch("hit_length",         &hit_length_);
     event_tree_->Branch("hit_process_key",    &hit_process_key_);
+
   //-----------------------------------------------------------//
 }
 
@@ -293,6 +294,7 @@ void HistoManager::AddMCParticle(MCParticle const * particle)
     particle_initial_y_.push_back(particle->InitialPosition().Y());
     particle_initial_z_.push_back(particle->InitialPosition().Z());
     particle_initial_t_.push_back(particle->InitialPosition().T());
+    G4cout << "PARTICLE INITIAL POSITION: (" << particle->InitialPosition().X() << ", " << particle->InitialPosition().Z() << ", " << particle->InitialPosition().Z() << ")" << G4endl;
 
     particle_initial_px_.push_back(particle->InitialMomentum().X());
     particle_initial_py_.push_back(particle->InitialMomentum().Y());
@@ -316,11 +318,14 @@ void HistoManager::AddMCParticle(MCParticle const * particle)
         hit_start_y_.push_back(hit.StartPoint().Y());
         hit_start_z_.push_back(hit.StartPoint().Z());
         hit_start_t_.push_back(hit.StartTime());
+        G4cout << "HIT START POINT: (" << hit.StartPoint().X() << ", " << hit.StartPoint().Y() << ", " << hit.StartPoint().Z() << ")" << G4endl;
+
 
         hit_end_x_.push_back(hit.EndPoint().X());
         hit_end_y_.push_back(hit.EndPoint().Y());
         hit_end_z_.push_back(hit.EndPoint().Z());
         hit_end_t_.push_back(hit.EndTime());
+        G4cout << "HIT END POINT: (" << hit.EndPoint().X() << ", " << hit.EndPoint().Y() << ", " << hit.EndPoint().Z() << ")" << G4endl;
 
         hit_length_.push_back(hit.Length());
         hit_energy_deposit_.push_back(hit.Energy());
@@ -328,6 +333,7 @@ void HistoManager::AddMCParticle(MCParticle const * particle)
         hit_process_key_.push_back(this->ProcessToKey(hit.Process()));
         number_hits_ += 1;
     }
+  G4cout << "END OF ADDMCPARTICLE" << G4endl;
 }
 
 int HistoManager::ProcessToKey(std::string const & process)

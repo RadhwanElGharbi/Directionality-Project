@@ -37,16 +37,9 @@ link_libraries(${ROOT_LIBRARIES})
 #----------------------------------------------------------------------------
 # Locate sources and headers for this project
 #
-include_directories(${PROJECT_SOURCE_DIR}/include 
-                    ${Geant4_INCLUDE_DIR})
-file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cc)
-file(GLOB headers ${PROJECT_SOURCE_DIR}/include/*.hh)
-
-#----------------------------------------------------------------------------
-# Add the executable, and link it to the Geant4 libraries
-#
-add_executable(directionality01 directionality01.cc ${sources} ${headers})
-target_link_libraries(directionality01 ${Geant4_LIBRARIES} )
+add_subdirectory(src)
+add_subdirectory(app)
+add_subdirectory(cfg)
 
 #----------------------------------------------------------------------------
 # Copy all scripts to the build directory, i.e. the directory in which we
@@ -54,10 +47,6 @@ target_link_libraries(directionality01 ${Geant4_LIBRARIES} )
 # relies on these scripts being in the current working directory.
 #
 set(directionality01_SCRIPTS
-    debug.mac
-    plotHisto.C
-    directionality01.in
-    vis.mac
     /macros/electron.mac
   )
 

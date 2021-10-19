@@ -89,10 +89,10 @@ void RunAction::BeginOfRunAction(const G4Run* run)
              
   //histograms
   //
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  /*G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   if ( analysisManager->IsActive() ) {
     analysisManager->OpenFile();
-  }  
+  } */ 
 // get run number
     HistoManager * histo_manager = HistoManager::Instance();
     // analysis_manager->Book(root_output_path_);
@@ -117,11 +117,11 @@ void RunAction::EndOfRunAction(const G4Run*)
   if (isMaster) fRun->EndOfRun();    
   
   //save histograms      
-  G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
+  /*G4AnalysisManager* analysisManager = G4AnalysisManager::Instance();
   if ( analysisManager->IsActive() ) {
     analysisManager->Write();
     analysisManager->CloseFile();
-  }
+  }*/
       
   // show Rndm status
   if (isMaster) G4Random::showEngineStatus();
@@ -131,6 +131,7 @@ void RunAction::EndOfRunAction(const G4Run*)
 
   // save run to ROOT file
   histo_manager->Save();
+  G4cout << "RUN SAVED" << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
