@@ -199,13 +199,16 @@ void EventAction::EndOfEventAction(const G4Event* event)
 
         histo_manager->AddMCParticle(particle);
     }
-
+    G4cout << "LINE 202 EventAction.cpp" << G4endl;
     // write event to ROOT file and reset event variables
     histo_manager->EventFill();
+    G4cout << "LINE 205 EventAction.cpp" << G4endl;
     histo_manager->EventReset();
+    G4cout << "LINE 207 EventAction.cpp" << G4endl;
 
     // reset event in MC truth manager
     mc_truth_manager->EventReset();
+    G4cout << "LINE 211 EventAction.cpp" << G4endl;
  //----------------------------------------------------------------------------------------------------------------------------------------//
 
         

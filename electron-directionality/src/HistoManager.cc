@@ -157,12 +157,12 @@ void HistoManager::Book()
   
   analysis->SetNtupleActivation(false);   
 
-  //-----------------------------------------------------------//
+  //-----------------------------------------------------------//f
     // ROOT output file
     std::string const file_path = "xOutOut.root";
 
     tfile_ = new TFile(file_path.data(), "recreate", "qpix");
-
+    G4cout << run_  << " " << event_ << " " << number_particles_ << " " << number_hits_ << " " << energy_deposit_ << " " << &particle_track_id_ << " " << &particle_parent_track_id_ << " " << &particle_pdg_code_ << " " << &particle_mass_ << " " << &particle_charge_ << " " << &particle_process_key_ << " " << &particle_initial_x_ << " " << &particle_initial_y_ << " " << &particle_initial_z_ << " " << &particle_initial_t_ << " " << &particle_initial_px_ << " " << &particle_initial_py_ << " " << &particle_initial_pz_ << " " << &particle_initial_energy_ << " " << &particle_number_daughters_ << " " << &particle_daughter_track_ids_ << " " << &hit_track_id_ << " " << &hit_start_x_ << " " << &hit_start_y_ << " " << &hit_start_z_ << " " << &hit_start_t_ << " " << &hit_end_x_ << " " << &hit_end_y_ << " " << &hit_end_z_ << " " << &hit_end_t_ << " " << &hit_energy_deposit_ << " " << &hit_length_ << " " << &hit_process_key_ << G4endl;
     // event tree
     event_tree_ = new TTree("event_tree", "event tree");
 
@@ -214,9 +214,13 @@ void HistoManager::Book()
 void HistoManager::Save()
 {
     // write TTree objects to file and close file
+    G4cout << "LINE 217 HistoManager.cpp" << G4endl;
     tfile_->cd();
-    event_tree_->Write();
+    G4cout << "LINE 219 HistoManager.cpp" << G4endl;
+    //event_tree_->Write();
+    G4cout << "LINE 221 HistoManager.cpp" << G4endl;
     tfile_->Close();
+    G4cout << "LINE 223 HistoManager.cpp" << G4endl;
 }
 
 void HistoManager::EventFill()

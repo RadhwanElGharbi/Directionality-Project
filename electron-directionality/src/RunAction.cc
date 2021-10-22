@@ -94,18 +94,24 @@ void RunAction::BeginOfRunAction(const G4Run* run)
     analysisManager->OpenFile();
   } */ 
 // get run number
+    G4cout << "LINE 97 RunAction.cpp" << G4endl;
     HistoManager * histo_manager = HistoManager::Instance();
     // analysis_manager->Book(root_output_path_);
+    G4cout << "LINE 100 RunAction.cpp" << G4endl;
     histo_manager->Book();
+    G4cout << "LINE 102 RunAction.cpp" << G4endl;
     histo_manager->SetRun(run->GetRunID());
 
     // reset event variables
+    G4cout << "LINE 106 RunAction.cpp" << G4endl;
     histo_manager->EventReset();
 
     // get MC truth manager
+    G4cout << "LINE 110 RunAction.cpp" << G4endl;
     MCTruthManager * mc_truth_manager = MCTruthManager::Instance();
 
     // reset event in MC truth manager
+    G4cout << "LINE 114 RunAction.cpp" << G4endl;
     mc_truth_manager->EventReset();
 
 }
@@ -130,8 +136,9 @@ void RunAction::EndOfRunAction(const G4Run*)
   HistoManager * histo_manager = HistoManager::Instance();
 
   // save run to ROOT file
+  G4cout << "LINE 139 RunAction.cpp" << G4endl;
   histo_manager->Save();
-  G4cout << "RUN SAVED" << G4endl;
+  G4cout << "LINE 141 RunAction.cpp" << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
