@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/local1/Geant4_Project/directionality-02/electron_directionality/app/directionality01.cpp" "/home/local1/Geant4_Project/directionality-02/electron_directionality/Build/app/CMakeFiles/directionality01.dir/directionality01.cpp.o"
+  "/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/directionality01.cpp" "/home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/app/CMakeFiles/directionality01.dir/directionality01.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -47,7 +47,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src/CMakeFiles/directionality_01.dir/DependInfo.cmake"
+  "/home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src/CMakeFiles/directionality_01.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

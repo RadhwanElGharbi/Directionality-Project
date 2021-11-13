@@ -11,7 +11,7 @@ app/CMakeFiles/directionality01.dir/directionality01.cpp.o
  ../src/Supernova.h
  ../src/SupernovaTiming.h
  ../src/TrackingAction.h
- /home/local1/Geant4_Project/directionality-02/electron_directionality/app/directionality01.cpp
+ /home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/directionality01.cpp
  /usr/local/clhep/2.4.4.0/include/CLHEP/Geometry/BasicVector3D.h
  /usr/local/clhep/2.4.4.0/include/CLHEP/Geometry/Normal3D.h
  /usr/local/clhep/2.4.4.0/include/CLHEP/Geometry/Plane3D.h

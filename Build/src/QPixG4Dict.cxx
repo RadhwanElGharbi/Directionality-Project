@@ -556,9 +556,9 @@ namespace {
 "/usr/local/clhep/2.4.4.0/lib/CLHEP-2.4.4.0/../../include",
 "/usr/local/geant4.10.07.p02/include/Geant4",
 "/usr/local/root/6.18.04/include",
-"/home/local1/Geant4_Project/directionality-02/electron_directionality/src",
+"/home/local1/Geant4_Project/Directionality-Project/electron_directionality/src",
 "/usr/local/root/6.18.04/include",
-"/home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src/",
+"/home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src/",
 0
     };
     static const char* fwdDeclCode = R"DICTFWDDCLS(

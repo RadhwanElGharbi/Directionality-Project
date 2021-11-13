@@ -62,10 +62,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/local1/Geant4_Project/directionality-02/electron_directionality
+CMAKE_SOURCE_DIR = /home/local1/Geant4_Project/Directionality-Project/electron_directionality
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/local1/Geant4_Project/directionality-02/electron_directionality/Build
+CMAKE_BINARY_DIR = /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build
 
 # Utility rule file for QPixG4Dict.
 
@@ -81,8 +81,8 @@ src/QPixG4Dict.cxx: ../src/LinkDef.h
 src/QPixG4Dict.cxx: ../src/AnalysisManager.h
 src/QPixG4Dict.cxx: ../src/AnalysisManager.h
 src/QPixG4Dict.cxx: ../src/LinkDef.h
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/local1/Geant4_Project/directionality-02/electron_directionality/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating QPixG4Dict.cxx, libQPixG4Dict_rdict.pcm, libQPixG4Dict.rootmap"
-	cd /home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src && /usr/bin/cmake -E env LD_LIBRARY_PATH=/usr/local/root/6.18.04/lib:/usr/local/root/6.18.04/lib:/usr/local/lib64:/usr/local/geant4/10.07.p02/lib64:/usr/local/clhep/2.4.4.0/lib:/usr/local/XercesC/3.2.3/lib:/usr/lib64:/usr/lib:/usr/local/OpenScientist/16.11.8/lib:/usr/local/OpenScientist/16.11.8/bin:/lib64 /usr/local/root/6.18.04/bin/rootcling -v2 -f QPixG4Dict.cxx -s /home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src/libQPixG4Dict.so -rml libQPixG4Dict.so -rmf /home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src/libQPixG4Dict.rootmap -DG4UI_USE_TCSH -DG4INTY_USE_QT -DG4UI_USE_QT -DG4VIS_USE_OPENGLQT -DG4INTY_USE_XT -DG4UI_USE_XM -DG4VIS_USE_OPENGLXM -DG4VIS_USE_OPENGLX -DG4VIS_USE_OPENGL -I/usr/local/clhep/2.4.4.0/lib/CLHEP-2.4.4.0/../../include -I/usr/local/geant4.10.07.p02/include/Geant4 -I/usr/local/root/6.18.04/include -I/home/local1/Geant4_Project/directionality-02/electron_directionality/src AnalysisManager.h /home/local1/Geant4_Project/directionality-02/electron_directionality/src/LinkDef.h
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating QPixG4Dict.cxx, libQPixG4Dict_rdict.pcm, libQPixG4Dict.rootmap"
+	cd /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src && /usr/bin/cmake -E env LD_LIBRARY_PATH=/usr/local/root/6.18.04/lib:/usr/local/root/6.18.04/lib:/usr/local/lib64:/usr/local/geant4/10.07.p02/lib64:/usr/local/clhep/2.4.4.0/lib:/usr/local/XercesC/3.2.3/lib:/usr/lib64:/usr/lib:/usr/local/OpenScientist/16.11.8/lib:/usr/local/OpenScientist/16.11.8/bin:/lib64 /usr/local/root/6.18.04/bin/rootcling -v2 -f QPixG4Dict.cxx -s /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src/libQPixG4Dict.so -rml libQPixG4Dict.so -rmf /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src/libQPixG4Dict.rootmap -DG4UI_USE_TCSH -DG4INTY_USE_QT -DG4UI_USE_QT -DG4VIS_USE_OPENGLQT -DG4INTY_USE_XT -DG4UI_USE_XM -DG4VIS_USE_OPENGLXM -DG4VIS_USE_OPENGLX -DG4VIS_USE_OPENGL -I/usr/local/clhep/2.4.4.0/lib/CLHEP-2.4.4.0/../../include -I/usr/local/geant4.10.07.p02/include/Geant4 -I/usr/local/root/6.18.04/include -I/home/local1/Geant4_Project/Directionality-Project/electron_directionality/src AnalysisManager.h /home/local1/Geant4_Project/Directionality-Project/electron_directionality/src/LinkDef.h
 
 src/libQPixG4Dict_rdict.pcm: src/QPixG4Dict.cxx
 	@$(CMAKE_COMMAND) -E touch_nocreate src/libQPixG4Dict_rdict.pcm
@@ -104,10 +104,10 @@ src/CMakeFiles/QPixG4Dict.dir/build: QPixG4Dict
 .PHONY : src/CMakeFiles/QPixG4Dict.dir/build
 
 src/CMakeFiles/QPixG4Dict.dir/clean:
-	cd /home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src && $(CMAKE_COMMAND) -P CMakeFiles/QPixG4Dict.dir/cmake_clean.cmake
+	cd /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src && $(CMAKE_COMMAND) -P CMakeFiles/QPixG4Dict.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/QPixG4Dict.dir/clean
 
 src/CMakeFiles/QPixG4Dict.dir/depend:
-	cd /home/local1/Geant4_Project/directionality-02/electron_directionality/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/local1/Geant4_Project/directionality-02/electron_directionality /home/local1/Geant4_Project/directionality-02/electron_directionality/src /home/local1/Geant4_Project/directionality-02/electron_directionality/Build /home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src /home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src/CMakeFiles/QPixG4Dict.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/local1/Geant4_Project/Directionality-Project/electron_directionality /home/local1/Geant4_Project/Directionality-Project/electron_directionality/src /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src /home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src/CMakeFiles/QPixG4Dict.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/QPixG4Dict.dir/depend
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/local1/Geant4_Project/directionality-02/electron_directionality/cfg
+# Install script for directory: /home/local1/Geant4_Project/Directionality-Project/electron_directionality/cfg
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -44,8 +44,8 @@ endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE FILE FILES
-    "/home/local1/Geant4_Project/directionality-02/electron_directionality/cfg/init_vis.mac"
-    "/home/local1/Geant4_Project/directionality-02/electron_directionality/cfg/vis.mac"
+    "/home/local1/Geant4_Project/Directionality-Project/electron_directionality/cfg/init_vis.mac"
+    "/home/local1/Geant4_Project/Directionality-Project/electron_directionality/cfg/vis.mac"
     )
 endif()
 

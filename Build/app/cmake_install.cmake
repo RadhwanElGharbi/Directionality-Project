@@ -1,4 +1,4 @@
-# Install script for directory: /home/local1/Geant4_Project/directionality-02/electron_directionality/app
+# Install script for directory: /home/local1/Geant4_Project/Directionality-Project/electron_directionality/app
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -49,12 +49,12 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/directionality01"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/local1/Geant4_Project/directionality-02/electron_directionality/Build/app/directionality01")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/app/directionality01")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/directionality01" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/directionality01")
     file(RPATH_CHANGE
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/directionality01"
-         OLD_RPATH "/usr/local/root/6.18.04/lib:/home/local1/Geant4_Project/directionality-02/electron_directionality/Build/src:/usr/local/geant4.10.07.p02/lib64:/usr/local/XercesC/3.2.3/lib:/usr/local/clhep/2.4.4.0/lib:"
+         OLD_RPATH "/usr/local/root/6.18.04/lib:/home/local1/Geant4_Project/Directionality-Project/electron_directionality/Build/src:/usr/local/geant4.10.07.p02/lib64:/usr/local/XercesC/3.2.3/lib:/usr/local/clhep/2.4.4.0/lib:"
          NEW_RPATH "")
     if(CMAKE_INSTALL_DO_STRIP)
       execute_process(COMMAND "/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/directionality01")

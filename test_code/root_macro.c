@@ -29,14 +29,18 @@ double last_progress_percentage_ = -1.0;
 // set branch addresses
 void set_branch_addresses();
 
+// TH3 Histogram
+void create_th3_hist(int entryID);
+
+// total hit energy deposit
+double get_hit_totedep(int entryID);
+
 //------------------------------------------------------------
 // input files
 //------------------------------------------------------------
 
 std::vector< std::string > file_list_ = {
-    "path/to/output/file_0.root",
-    "path/to/output/file_1.root",
-    "path/to/output/file_2.root",
+    "single_electron.root"
 };
 
 TChain * chain_ = new TChain("event_tree");
@@ -68,6 +72,8 @@ std::vector< double > * particle_initial_px_ = 0;
 std::vector< double > * particle_initial_py_ = 0;
 std::vector< double > * particle_initial_pz_ = 0;
 std::vector< double > * particle_initial_energy_ = 0;
+
+std::vector< double > * particle_number_daughters_ = 0;
 
 std::vector< int >    * hit_track_id_ = 0;
 std::vector< double > * hit_start_x_ = 0;
@@ -108,6 +114,8 @@ void set_branch_addresses(TChain * chain)
   chain->SetBranchAddress("particle_initial_py", &particle_initial_py_);
   chain->SetBranchAddress("particle_initial_pz", &particle_initial_pz_);
   chain->SetBranchAddress("particle_initial_energy", &particle_initial_energy_);
+  
+  chain->SetBranchAddress("particle_number_daughters", &particle_number_daughters_);
 
   chain->SetBranchAddress("hit_track_id", &hit_track_id_);
 
@@ -175,6 +183,7 @@ int main()
       double const initial_py = particle_initial_py_->at(p_idx);  // MeV
       double const initial_pz = particle_initial_pz_->at(p_idx);  // MeV
       double const initial_energy = particle_initial_energy_->at(p_idx);  // MeV
+      double const number_daughters = particle_number_daughters_->at(p_idx); 
     }
 
     // loop over all hits in the event
@@ -259,6 +268,38 @@ void update_progress(double progress, size_t precision=1)
 //----------------------------------------------------------------------
 // run, forrest, run!
 //----------------------------------------------------------------------
+
+
+void create_th3_hist(int entryID)
+{
+	chain_->GetEntry(entryID);
+	TCanvas* canv = new TCanvas();
+	TH3D* hist = new TH3D("e- Xe Hist", "e- tracks and hits in Xe", 100, -120, 120, 100, -120, 120, 100, -1200, 1200);
+	for(int iter = 0; iter < (*particle_initial_x_).size(); iter++)
+	{
+		hist->Fill((*particle_initial_x_)[iter], (*particle_initial_x_)[iter], (*particle_initial_x_)[iter]);
+	}
+	
+	for(int iter = 0; iter < (*hit_start_z_).size(); iter++)
+	{
+		hist->Fill((*hit_start_x_)[iter], (*hit_start_y_)[iter], (*hit_start_z_)[iter]);
+		hist->Fill((*hit_end_x_)[iter], (*hit_end_y_)[iter], (*hit_end_z_)[iter]);
+	}
+	hist->Draw();
+}
+
+double get_hit_totedep(int entryID)
+{
+	chain_->GetEntry(entryID);
+	double totedep = 0;
+	for(int iter = 0; iter < (*hit_energy_deposit_).size(); iter++)
+	{
+		totedep+=(*hit_energy_deposit_)[iter];
+	}
+	
+	return totedep;
+}
+
 void root_macro()
 {
   main();

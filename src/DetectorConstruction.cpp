@@ -45,12 +45,12 @@ void DetectorConstruction::DefineMaterials()
 {
   // target density
   targetPressure=15;
-  densityXe = ((targetPressure*molarMassXe)/(0.0821*275))/1E3;
+  densityXe = ((targetPressure*molarMassXe)/(0.0821*273.15))/1E3;
   densityXe136 = 80.3; //kg/m3
 
   // build materials
   //
-  mXenon = new G4Material("Xenon", 54, molarMassXe*g/mole, densityXe*g/cm3, kStateGas, 275.*kelvin, targetPressure=15*atmosphere);
+  mXenon = new G4Material("Xenon", 54, molarMassXe*g/mole, densityXe*g/cm3, kStateGas, 273.15*kelvin, targetPressure=15*atmosphere);
   mXenon136 = new G4Material("Xenon136", 54, molarMassXe136*g/mole, densityXe136*kg/m3, kStateGas, 275.*kelvin, targetPressure=15*atmosphere);
 
   G4Element* N  = new G4Element("Nitrogen", "N", 7, 14.01*g/mole);

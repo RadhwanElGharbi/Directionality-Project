@@ -4,7 +4,7 @@
 # compile CXX with /bin/c++
 CXX_DEFINES = -DG4INTY_USE_QT -DG4INTY_USE_XT -DG4UI_USE_QT -DG4UI_USE_TCSH -DG4UI_USE_XM -DG4VIS_USE_OPENGL -DG4VIS_USE_OPENGLQT -DG4VIS_USE_OPENGLX -DG4VIS_USE_OPENGLXM -Ddirectionality_01_EXPORTS
 
-CXX_INCLUDES = -I/usr/local/clhep/2.4.4.0/lib/CLHEP-2.4.4.0/../../include -I/usr/local/root/6.18.04/include -I/home/local1/Geant4_Project/directionality-02/electron_directionality/src -isystem /usr/local/geant4.10.07.p02/include/Geant4
+CXX_INCLUDES = -I/usr/local/clhep/2.4.4.0/lib/CLHEP-2.4.4.0/../../include -I/usr/local/root/6.18.04/include -I/home/local1/Geant4_Project/Directionality-Project/electron_directionality/src -isystem /usr/local/geant4.10.07.p02/include/Geant4
 
 CXX_FLAGS = -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -pthread -ftls-model=initial-exec -std=c++11   -std=c++11 -pipe -fsigned-char -pthread -O3 -DNDEBUG -fno-trapping-math -ftree-vectorize -fno-math-errno -O2 -DNDEBUG -fPIC
 

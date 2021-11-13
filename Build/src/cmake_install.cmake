@@ -1,4 +1,4 @@
-# Install script for directory: /home/local1/Geant4_Project/directionality-02/electron_directionality/src
+# Install script for directory: /home/local1/Geant4_Project/Directionality-Project/electron_directionality/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

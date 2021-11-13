@@ -72,19 +72,19 @@ string
 G4UserTrackingAction.hh
 ../src/G4UserTrackingAction.hh
 
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/directionality01.cpp
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/directionality01.cpp
 DetectorConstruction.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/DetectorConstruction.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/DetectorConstruction.h
 PrimaryGeneration.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/PrimaryGeneration.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/PrimaryGeneration.h
 RunAction.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/RunAction.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/RunAction.h
 EventAction.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/EventAction.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/EventAction.h
 TrackingAction.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/TrackingAction.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/TrackingAction.h
 SteppingAction.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/SteppingAction.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/SteppingAction.h
 G4RunManager.hh
 -
 G4UImanager.hh
@@ -98,9 +98,9 @@ FTFP_BERT_HP.hh
 G4EmStandardPhysics_option4.hh
 -
 Randomize.hh
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/Randomize.hh
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/Randomize.hh
 time.h
-/home/local1/Geant4_Project/directionality-02/electron_directionality/app/time.h
+/home/local1/Geant4_Project/Directionality-Project/electron_directionality/app/time.h
 
 /usr/local/clhep/2.4.4.0/include/CLHEP/Geometry/BasicVector3D.h
 iosfwd
