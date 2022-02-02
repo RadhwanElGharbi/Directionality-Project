@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+//#include "matplotlibcpp.h"
 
 // ROOT includes
 #include "TBranch.h"
@@ -31,6 +32,15 @@ void set_branch_addresses();
 
 // TH3 Histogram
 void create_th3_hist(int entryID);
+
+// Cone
+std::vector<double> get_vector_2points(double p1_x, double p1_y, double p1_z, double p2_x, double p2_y, double p2_z);
+std::vector<double> cross_product(std::vector<double> vector1, std::vector<double> vector2);
+double vector_magnitude(std::vector<double> vec);
+double distance_point_line_3d(int index);
+double get_cone_radius(int index);
+bool is_hit_inside_cone(int index, double angle);
+
 
 // total hit energy deposit
 double get_hit_totedep(int entryID);
@@ -87,6 +97,11 @@ std::vector< double > * hit_end_t_ = 0;
 std::vector< double > * hit_length_ = 0;
 std::vector< double > * hit_energy_deposit_ = 0;
 std::vector< int >    * hit_process_key_ = 0;
+
+std::vector< TVector3 > particle_initial_tvector3_;
+std::vector< TVector3 > particle_initial_ptvector3_;
+
+double degrees = 180 / (atan(1) * 4);
 
 // set branch addresses
 void set_branch_addresses(TChain * chain)
@@ -214,6 +229,8 @@ int main()
       double const process_key = hit_process_key_->at(h_idx);
     }
   }
+  // TESTING CONE
+  // TESTING CONE
 } // main()
 
 //----------------------------------------------------------------------
@@ -274,11 +291,15 @@ void create_th3_hist(int entryID)
 {
 	chain_->GetEntry(entryID);
 	TCanvas* canv = new TCanvas();
-	TH3D* hist = new TH3D("e- Xe Hist", "e- tracks and hits in Xe", 100, -120, 120, 100, -120, 120, 100, -1200, 1200);
+	TH3D* hist = new TH3D("e- Xe Hist", "e- tracks and hits in Xe", 100, -120, 120, 100, -120, 120, 100, 0, 2000);
+	
+	// Initial Particle 
 	for(int iter = 0; iter < (*particle_initial_x_).size(); iter++)
 	{
-		hist->Fill((*particle_initial_x_)[iter], (*particle_initial_x_)[iter], (*particle_initial_x_)[iter]);
+	    hist->Fill((*particle_initial_x_)[iter], (*particle_initial_y_)[iter], (*particle_initial_z_)[iter]);
 	}
+	
+	TVector3 particle__momentum((*particle_initial_px_)[0], (*particle_initial_py_)[0], (*particle_initial_pz_)[0]);
 	
 	for(int iter = 0; iter < (*hit_start_z_).size(); iter++)
 	{
@@ -287,6 +308,111 @@ void create_th3_hist(int entryID)
 	}
 	hist->Draw();
 }
+
+//=================================CONE START=======================================//
+
+std::vector<double> get_vector_2points(double p1_x, double p1_y, double p1_z, double p2_x, double p2_y, double p2_z)
+{
+    std::vector<double> newVec;
+    newVec.push_back((p1_x - p2_x));
+    newVec.push_back((p1_y - p2_y));
+    newVec.push_back((p1_z - p2_z));
+    return newVec;
+}
+
+std::vector<double> cross_product(std::vector<double> vector1, std::vector<double> vector2)
+{
+    std::vector<double> newVec;
+    newVec.push_back((vector1[1]*vector2[2])-(vector1[2]*vector2[1]));
+    newVec.push_back((vector1[2] * vector2[0]) - (vector1[0] * vector2[2]));
+    newVec.push_back((vector1[0] * vector2[1]) - (vector1[1] * vector2[0]));
+    return newVec;
+}
+
+double vector_magnitude(std::vector<double> vec)
+{
+    return sqrt(pow(vec[0], 2) + pow(vec[1], 2) + pow(vec[2], 2));
+}
+
+/*double distance_point_line_3d(int index)
+{
+    // Q (particle_initial_xyz) is point on the line and P (hit_start_xyz) is point off the line
+    std::vector<double> vec_qp = get_vector_2points((*particle_initial_x_)[index], (*particle_initial_y_)[index], (*particle_initial_z_)[index], (*hit_start_x_)[index], (*hit_start_y_)[index], (*hit_start_z_)[index]);
+    std::vector<double> cone_primary_axis;
+    cone_primary_axis.push_back((*particle_initial_px_)[index]);
+    cone_primary_axis.push_back((*particle_initial_py_)[index]);
+    cone_primary_axis.push_back((*particle_initial_pz_)[index]);
+    double numerator = vector_magnitude(cross_product(vec_qp, cone_primary_axis));
+    double denominator = vector_magnitude(cone_primary_axis);
+    return numerator / denominator;
+}*/
+
+double distance_point_line_3d(int index)
+{
+    // Q (particle_initial_xyz) is point on the line and P (hit_start_xyz_) is point off the line
+    std::vector<double> vec_qp = get_vector_2points((*particle_initial_x_)[0], (*particle_initial_y_)[0], (*particle_initial_z_)[0], (*hit_start_x_)[index], (*hit_start_y_)[index], (*hit_start_z_)[index]);
+    std::vector<double> cone_primary_axis;
+    cone_primary_axis.push_back((*particle_initial_px_)[0]);
+    cone_primary_axis.push_back((*particle_initial_py_)[0]);
+    cone_primary_axis.push_back((*particle_initial_pz_)[0]);
+    double numerator = vector_magnitude(cross_product(vec_qp, cone_primary_axis));
+    double denominator = vector_magnitude(cone_primary_axis);
+    return numerator / denominator;
+}
+
+double get_cone_radius(int index, double angle)
+{
+    int hypotenuse = sqrt(pow(((*hit_start_x_)[index] - (*particle_initial_x_)[0]), 2) + pow(((*hit_start_y_)[index] - (*particle_initial_y_)[0]), 2) + pow(((*hit_start_z_)[index] - (*particle_initial_z_)[0]), 2));
+    int opposite = distance_point_line_3d(index);
+    int cone_height = hypotenuse * cos(asin(opposite / hypotenuse));
+    //std::cout << cone_height * tan(angle) << std::endl;
+    return cone_height * tan(angle);
+}
+
+bool is_hit_inside_cone(int index, double angle)
+{
+    if (get_cone_radius(index, angle) < distance_point_line_3d(index))
+    {
+        return false;
+    }
+    else
+    {
+        return true;
+    }
+}
+
+void create_cone(int entryID, double angle)
+{
+    chain_->GetEntry(entryID);
+    int count = 0;
+    double countDub = 0;
+    for (int i = 0; i < (*hit_start_x_).size(); i++)
+    {
+        if (is_hit_inside_cone(i, (angle/180)* 3.14159265359) == true)
+        {
+            std::cout << "IN" << std::endl;
+            count++;
+            countDub++;
+        }
+        else
+        {
+            std::cout << "OUT" << std::endl;
+        }
+    }
+    if ((*hit_start_x_).size() == 0)
+    {
+        std::cout << "No hits in entry ID: " << entryID << std::endl;
+    }
+    else
+    {
+        std::cout << "Number of hits inside cone of angle " << angle << " degrees: " << count << "/" << (*hit_start_x_).size() << std::endl;
+        std::cout << "Percentage: " << (countDub / (*hit_start_x_).size()) * 100 << "%" << std::endl;
+    }
+
+}
+
+//=================================CONE END=======================================//
+
 
 double get_hit_totedep(int entryID)
 {
